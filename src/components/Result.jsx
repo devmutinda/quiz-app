@@ -2,7 +2,7 @@ import logo from '../assets/quiz-complete.png';
 import Summary from './Summary';
 import SummaryStats from './SummaryStats';
 
-export default function Result({ questionObject: { answeredQuestions } }) {
+export default function Result({ answeredQuestions }) {
   return (
     <section id="summary">
       <img src={logo} alt="Trophy image" />

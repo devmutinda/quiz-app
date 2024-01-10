@@ -2,13 +2,8 @@ import { useState, useEffect } from 'react';
 
 let interval;
 const MAX_TIMER = 5000;
-const MIN_TIMER = 2000;
-export default function ProgressBar({
-  answered,
-  checkQuestion,
-  disabled,
-  loadNextQuestion,
-}) {
+const MIN_TIMER = 1000;
+export default function ProgressBar({ answered, checkQuestion }) {
   const [time, setTime] = useState({ timer: MAX_TIMER, remaining: MAX_TIMER });
   useEffect(() => {
     if (answered) {
@@ -24,6 +19,10 @@ export default function ProgressBar({
   useEffect(() => {
     interval = setInterval(() => {
       // console.log('Interval started');
+      if (time.remaining <= 0) {
+        setTime({ timer: MIN_TIMER, remaining: MIN_TIMER });
+        checkQuestion();
+      }
       setTime((prevTime) => ({
         ...prevTime,
         remaining: prevTime.remaining - 10,
@@ -32,21 +31,9 @@ export default function ProgressBar({
 
     return () => {
       clearInterval(interval);
-      // console.log('Interval cleared');
+      console.log('Interval cleared');
     };
-  }, [disabled]);
-
-  if (time.remaining <= 0) {
-    clearInterval(interval);
-
-    if (disabled) {
-      setTime({ timer: MAX_TIMER, remaining: MAX_TIMER });
-      loadNextQuestion();
-    } else {
-      setTime({ timer: MIN_TIMER, remaining: MIN_TIMER });
-      checkQuestion();
-    }
-  }
+  }, [time]);
 
   return (
     <progress

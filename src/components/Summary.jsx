@@ -7,9 +7,7 @@ export default function Summary({ questions }) {
         const { id, state, questionId } = answer;
         const question = QUESTIONS.find((qn) => qn.id === questionId);
         const userAnswer =
-          state === 'skipped'
-            ? question.answers[question.correctAnswer]
-            : question.answers[id];
+          state === 'skipped' ? 'Skipped' : question.answers[id];
         return (
           <li key={questionId}>
             <h3>{idx + 1}</h3>

@@ -1,8 +1,8 @@
 function formatNumbers(summary, questions) {
   let { skipped, correct, wrong } = summary;
-  skipped = ((skipped / questions.length) * 100).toFixed(1);
-  correct = ((correct / questions.length) * 100).toFixed(1);
-  wrong = ((wrong / questions.length) * 100).toFixed(1);
+  skipped = ((skipped / questions.length) * 100).toFixed(0);
+  correct = ((correct / questions.length) * 100).toFixed(0);
+  wrong = ((wrong / questions.length) * 100).toFixed(0);
 
   return { skipped, correct, wrong };
 }
